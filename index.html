@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>n-rooks solver</title>
+    <link rel="stylesheet" href="css/styles.css">
+  </head>
+  <body>
+    <script src="lib/jquery-1.8.3.js"></script>
+    <script src="lib/underscore.js"></script>
+    <script src="lib/backbone.js"></script>
+    <script src="src/Board.js"></script>
+    <script src="src/BoardView.js"></script>
+    <script src="src/solvers.js"></script>
+    <script>
+    </script>
+    <ul>
+      <li><b>Rows</b> run horizontally, left to right</li>
+      <li><b>Columns</b> run vertically, top to bottom</li>
+      <li><b>Major Diagonals</b> run diagonally, top-left to bottom-right</li>
+      <li><b>Minor Diagonals</b> run diagonally, top-right to bottom-left</li>
+      <li>var n = 4;</li>
+      <li>var board = new Board({n})</li>
+</ul>
+      <p>Don't reinvent the wheel where you don't have to. Use the Board constructor you build out in src/Board.js in your code. You can also access it within the Chrome console easily after opening BoardViewer.html</p>
+      Create new board instances that have access to all the helper methods you write in src/Board.js
+      <li>example: var board = new Board({n:5})</li>
+      <li>Rather than setting or getting object properties directly with plain JavaScript, Backbone provides the get and set methods. Play with the getters and setters that Backbone provides</li>
+      <br /> <b>example: board.get(3)</b> will return the 3rd row of the instance board (assuming that instance exists)
+
+      <h2>Methods</h2>
+      <ol>
+        <h4>Conflicts</h4>
+        <li>board.hasAnyColConflicts</li>
+        <li>board.hasAnyMajorDiagonalConflicts</li>
+        <li>board.hasAnyMinorDiagonalConflicts</li>
+        <li>hasAnyQueenConflictsOn</li>
+        <li>hasAnyQueensConflicts</li>
+        <li>hasAnyRooksConflicts</li>
+        <li>hasAnyRowConflicts</li>
+        <li>hasColConflictAt</li>
+        <li>hasMajorDiagonalConflictAt</li>
+        <li>hasMinorDiagonalConflictAt</li>
+        <li>hasRowConflictAt</li>
+        <h4>Other</h4>
+        <li>rows</li>
+        <li>togglePiece</li>
+        <li>get</li>
+        <li>set</li>
+      </ol>
+
+<script>
+var n = 4;
+var board = new Board({n});
+console.log({board})
+// console.log({'board.get': board.get(3)})
+// // console.log({'board.get': board.set(0, 1)})
+// console.log({'board.get': board.set(0, 3)})
+// console.log({'board.get': board.set(1, 1)})
+// console.log({'board.get': board.set(2, 1)})
+
+
+console.log(board.rows());
+console.log('togglePiece:', board.togglePiece)
+console.log('initialize:', board.initialize)
+// board.hasAnyColConflicts
+// board.hasAnyMajorDiagonalConflicts
+// board.hasAnyMinorDiagonalConflicts
+// hasAnyQueenConflictsOn
+
+// hasAnyQueensConflicts
+// hasAnyRooksConflicts
+// hasAnyRowConflicts
+// hasColConflictAt
+// hasMajorDiagonalConflictAt
+// hasMinorDiagonalConflictAt
+// hasRowConflictAt
+
+// rows
+// togglePiece
+// get
+// set
+</script>
+  </body>
+</html>
