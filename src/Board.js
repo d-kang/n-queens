@@ -159,22 +159,22 @@
       var bord = this;
       var rows = bord.rows();
       var count = 0;
-      if (major >= 0) {
-        for (var i = 0; i < rows.length; i++) {
+      var isPositive = true;
+      if (major < 0) {
+        isPositive = false;
+        major = Math.abs(major);
+      }
+      for (var i = 0; i < rows.length; i++) {
+        if (isPositive) {
           if (rows[i][i + major] === 1) {
             count++;
           }
-        }
-      } else {
-        major = Math.abs(major);
-        // debugger;
-        for (var k = 0; k < rows.length; k++) {
-          if (rows[major + k] && rows[major + k][k] === 1) {
+        } else {
+          if (rows[major + i] && rows[major + i][i] === 1) {
             count++;
           }
         }
       }
-      console.log({count});
       return count >= 2;
     },
 
