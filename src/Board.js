@@ -100,7 +100,6 @@
       var check = false;
       var count = 0;
       var checkConflict = function() {
-        console.log(bord.get(count));
         if (bord.get(count) && check === false) {
           if (bord.hasRowConflictAt(count)) {
             check = true;
