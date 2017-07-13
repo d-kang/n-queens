@@ -175,7 +175,7 @@
         }
       }
       console.log({count});
-      return count >= 2
+      return count >= 2;
     },
 
     // test if any major diagonals on this board contain conflicts
@@ -195,15 +195,40 @@
 
     // Minor Diagonals - go from top-right to bottom-left
     // --------------------------------------------------------------
-    //
+    // minorDiagonalColumnIndexAtFirstRow
     // test if a specific minor diagonal on this board contains a conflict
-    hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+    hasMinorDiagonalConflictAt: function(minor) {
+      var bord = this;
+      var rows = bord.rows();
+      var count = 0;
+      if (minor >= 0) {
+        for (var i = 0; i < rows.length; i++) {
+          if (rows[i][minor - i] === 1) {
+            count++;
+          }
+        }
+      } else {
+        minor = Math.abs(minor);
+        for (var k = 0; k < rows.length; k++) {
+          if (rows[minor + k] && rows[minor + k][rows.length - 1 - k] === 1) {
+            count++;
+          }
+        }
+      }
+      return count >= 2;
     },
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
-      return false; // fixme
+      var bord = this;
+      var rows = this.rows();
+      var check = false;
+      for (var i = (0 - rows.length - 1); i < rows.length; i++) {
+        if (check === false) {
+          check = bord.hasMinorDiagonalConflictAt(i);
+        }
+      }
+      return check;
     }
 
     /*--------------------  End of Helper Functions  ---------------------*/
