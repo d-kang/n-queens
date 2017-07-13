@@ -62,7 +62,7 @@
     },
 
 
-/*
+    /*
          _             _     _
      ___| |_ __ _ _ __| |_  | |__   ___ _ __ ___ _
     / __| __/ _` | '__| __| | '_ \ / _ \ '__/ _ (_)
@@ -108,7 +108,7 @@
           count++;
           checkConflict();
         }
-      }
+      };
       checkConflict();
       return check;
     },
@@ -126,7 +126,7 @@
         var row = bord.get(i);
         if (row[col] === 1) {
           count++;
-        };
+        }
       }
       return count >= 2;
     },
@@ -144,7 +144,7 @@
           return memo;
         }
         return memo = bord.hasColConflictAt(i);
-      }, false)
+      }, false);
       return hasConflict;
     },
 
@@ -152,15 +152,43 @@
 
     // Major Diagonals - go from top-left to bottom-right
     // --------------------------------------------------------------
-    //
+    // majorDiagonalColumnIndexAtFirstRow
     // test if a specific major diagonal on this board contains a conflict
-    hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
-      return false;
+    hasMajorDiagonalConflictAt: function(major) {
+
+      var bord = this;
+      var rows = bord.rows();
+      var count = 0;
+      if (major >= 0) {
+        for (var i = 0; i < rows.length; i++) {
+          if (rows[i][i + major] === 1) {
+            count++;
+          }
+        }
+      } else {
+        major = Math.abs(major);
+        // debugger;
+        for (var k = 0; k < rows.length; k++) {
+          if (rows[major + k] && rows[major + k][k] === 1) {
+            count++;
+          }
+        }
+      }
+      console.log({count});
+      return count >= 2
     },
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-      return false; // fixme
+      var bord = this;
+      var rows = this.rows();
+      var check = false;
+      for (var i = (0 - rows.length); i < rows.length; i++) {
+        if (check === false) {
+          check = bord.hasMajorDiagonalConflictAt(i);
+        }
+      }
+      return check;
     },
 
 

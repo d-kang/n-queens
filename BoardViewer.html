@@ -54,5 +54,14 @@
         countNQueensSolutions(n);
       });
     </script>
+    <script>
+    console.log('hi from boardViewer')
+        var board = new Board({n: 4})
+        board.togglePiece(1,0)
+        board.togglePiece(2,1)
+        JSON.stringify(board, null, 2)
+        console.log('hasMajorDiagonalConflictAt(-1)', board.hasMajorDiagonalConflictAt(-1))
+        console.log('hasAnyMajorDiagonalConflicts():', board.hasAnyMajorDiagonalConflicts())
+    </script>
   </body>
 </html>
