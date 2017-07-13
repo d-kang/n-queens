@@ -155,7 +155,6 @@
     // majorDiagonalColumnIndexAtFirstRow
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(major) {
-
       var bord = this;
       var rows = bord.rows();
       var count = 0;
@@ -201,16 +200,18 @@
       var bord = this;
       var rows = bord.rows();
       var count = 0;
-      if (minor >= 0) {
-        for (var i = 0; i < rows.length; i++) {
+      var isPositive = true;
+      if (minor < 0) {
+        isPositive = false;
+        minor = Math.abs(minor);
+      }
+      for (var i = 0; i < rows.length; i++) {
+        if (isPositive) {
           if (rows[i][minor - i] === 1) {
             count++;
           }
-        }
-      } else {
-        minor = Math.abs(minor);
-        for (var k = 0; k < rows.length; k++) {
-          if (rows[minor + k] && rows[minor + k][rows.length - 1 - k] === 1) {
+        } else {
+          if (rows[minor + i] && rows[minor + i][rows.length - 1 - i] === 1) {
             count++;
           }
         }
