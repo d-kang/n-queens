@@ -79,22 +79,23 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      const board = this.rows();
-      const row = board[rowIndex];
-      const numOfPiecesInRow = _.reduce(row, (acc, piece) => acc + piece, 0);
-      const hasConflict = numOfPiecesInRow > 1;
-      return hasConflict;
+      const row = this.rows()[rowIndex];
+      const len = row.length;
+      let count = 0;
+      for (let piece of row) {
+        count += piece;
+        if (count > 1) { return true; }
+      }
+      return false;
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      const board = this.rows();
-      return _.reduce(board, (acc, row, i) => {
-        if (acc) {
-          return acc;
-        }
-        return this.hasRowConflictAt(i);
-      }, false);
+      const length = this.rows().length;
+      for (let i = 0; i < length; i++) {
+        if (this.hasRowConflictAt(i)) { return true; }
+      }
+      return false;
     },
 
 
@@ -104,32 +105,22 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(col) {
-      var bord = this;
-      var count = 0;
-      for (var i = 0; i < bord.rows().length; i++) {
-        var row = bord.get(i);
-        if (row[col] === 1) {
-          count++;
-        }
+      const rows = this.rows();
+      let count = 0;
+      for (let row of rows) {
+        count += row[colIndex];
+        if (count > 1) { return true; }
       }
-      return count >= 2;
+      return false;
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      /*for (var i = 0; i < bord.rows().length; i++) {
-        this.hasColConflictAt(i);
-
-      }*/
-      var bord = this;
-      var rows = this.rows();
-      var hasConflict = rows.reduce(function(memo, col, i) {
-        if (memo) {
-          return memo;
-        }
-        return memo = bord.hasColConflictAt(i);
-      }, false);
-      return hasConflict;
+      const length = this.rows().length;
+      for (var i = 0; i < length; i++) {
+        if (this.hasColConflictAt(i)) { return true; }
+      }
+      return false;
     },
 
 
