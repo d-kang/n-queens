@@ -130,39 +130,22 @@
     // majorDiagonalColumnIndexAtFirstRow
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(major) {
-      var bord = this;
-      var rows = bord.rows();
-      var count = 0;
-      var isPositive = true;
-      if (major < 0) {
-        isPositive = false;
-        major = Math.abs(major);
+      const len = this.rows().length - colIndex;
+      let count = 0;
+      for (var i = 0; i < len; i++) {
+        count += this.rows()[i][colIndex + i];
+        if (count > 1) { return true; }
       }
-      for (var i = 0; i < rows.length; i++) {
-        if (isPositive) {
-          if (rows[i][i + major] === 1) {
-            count++;
-          }
-        } else {
-          if (rows[major + i] && rows[major + i][i] === 1) {
-            count++;
-          }
-        }
-      }
-      return count >= 2;
+      return false;
     },
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-      var bord = this;
-      var rows = this.rows();
-      var check = false;
-      for (var i = (0 - rows.length); i < rows.length; i++) {
-        if (check === false) {
-          check = bord.hasMajorDiagonalConflictAt(i);
-        }
+      const len = this.rows().length;
+      for (var i = 0; i < len; i++) {
+        if (this.hasMajorDiagonalConflictAt(i)) { return true; }
       }
-      return check;
+      return false;
     },
 
 
