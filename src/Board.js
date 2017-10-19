@@ -189,15 +189,12 @@
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
-      var bord = this;
-      var rows = this.rows();
-      var check = false;
-      for (var i = (0 - rows.length - 1); i < rows.length; i++) {
-        if (check === false) {
-          check = bord.hasMinorDiagonalConflictAt(i);
-        }
+      const len = this.rows().length;
+      const start = (len) * (-1);
+      for (var i = start; i < len; i++) {
+        if (this.hasMinorDiagonalConflictAt(i)) { return true; }
       }
-      return check;
+      return false;
     }
 
     /*--------------------  End of Helper Functions  ---------------------*/
