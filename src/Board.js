@@ -167,27 +167,24 @@
     // --------------------------------------------------------------
     // minorDiagonalColumnIndexAtFirstRow
     // test if a specific minor diagonal on this board contains a conflict
-    hasMinorDiagonalConflictAt: function(minor) {
-      var bord = this;
-      var rows = bord.rows();
+    hasMinorDiagonalConflictAt: function(colIndex) {
+      const rows = this.rows();
       var count = 0;
       var isPositive = true;
-      if (minor < 0) {
+      if (colIndex < 0) {
         isPositive = false;
-        minor = Math.abs(minor);
+        colIndex = Math.abs(colIndex);
       }
       for (var i = 0; i < rows.length; i++) {
         if (isPositive) {
-          if (rows[i][minor - i] === 1) {
-            count++;
-          }
+          count += rows[i][colIndex - i];
+          if (count > 1) { return true; }
         } else {
-          if (rows[minor + i] && rows[minor + i][rows.length - 1 - i] === 1) {
-            count++;
-          }
+          count += (rows[colIndex + i] && rows[colIndex + i][rows.length - 1 - i]);
+          if (count > 1) { return true; }
         }
       }
-      return count >= 2;
+      return false;
     },
 
     // test if any minor diagonals on this board contain conflicts
