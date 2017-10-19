@@ -104,7 +104,7 @@
     // --------------------------------------------------------------
     //
     // test if a specific column on this board contains a conflict
-    hasColConflictAt: function(col) {
+    hasColConflictAt: function(colIndex) {
       const rows = this.rows();
       let count = 0;
       for (let row of rows) {
@@ -129,7 +129,7 @@
     // --------------------------------------------------------------
     // majorDiagonalColumnIndexAtFirstRow
     // test if a specific major diagonal on this board contains a conflict
-    hasMajorDiagonalConflictAt: function(major) {
+    hasMajorDiagonalConflictAt: function(colIndex) {
       let count = 0;
       let isNegativeIndex;
       if (colIndex < 0) {
@@ -149,7 +149,6 @@
           if (count > 1) { return true; }
         }
       }
-
       return false;
     },
 
