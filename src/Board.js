@@ -79,37 +79,22 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      var bord = this;
-      var check = false;
-      var count = 0;
-      var row = bord.get(rowIndex);
-      row.forEach(function(element) {
-        if (element === 1) {
-          count++;
-        }
-      });
-      if (count > 1) {
-        check = true;
-      }
-      return check;
+      const board = this.rows();
+      const row = board[rowIndex];
+      const numOfPiecesInRow = _.reduce(row, (acc, piece) => acc + piece, 0);
+      const hasConflict = numOfPiecesInRow > 1;
+      return hasConflict;
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      var bord = this;
-      var check = false;
-      var count = 0;
-      var checkConflict = function() {
-        if (bord.get(count) && check === false) {
-          if (bord.hasRowConflictAt(count)) {
-            check = true;
-          }
-          count++;
-          checkConflict();
+      const board = this.rows();
+      return _.reduce(board, (acc, row, i) => {
+        if (acc) {
+          return acc;
         }
-      };
-      checkConflict();
-      return check;
+        return this.hasRowConflictAt(i);
+      }, false);
     },
 
 
